@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>プロフェッショナルの投資アプローチ - 市場心理分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --accent-light: #f39c12;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --bg-light: #f8f9fa;
+            --bg-dark: #1a1a1a;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 0.5rem;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        
+        .dark {
+            --text-dark: #ecf0f1;
+            --text-light: #2c3e50;
+            --bg-light: #121212;
+            --card-bg: #1e1e1e;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes toushi-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.7); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(230, 126, 34, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 126, 34, 0); }
+        }
+        
+        .shisan-button {
+            animation: toushi-pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+        
+        .toushi-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .kabuka-count {
+            animation: blink 1.2s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .kinyu-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .kinyu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .shoken-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--accent);
+            color: white;
+        }
+        
+        .meigara-divider {
+            height: 3px;
+            width: 60px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
+        
+        .shihyo-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .nihon-btn {
+            background: var(--accent);
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nihon-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tokyo-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tokyo-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .tokyo-content {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- ヘッダー -->
+        <header class="toushi-header text-white py-8">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center leading-tight mb-2">
+                    市場心理学から紐解く<span class="text-[var(--accent)]">投資戦略</span>
+                </h1>
+                <div class="meigara-divider"></div>
+                <p class="text-lg md:text-xl text-center font-light max-w-3xl mx-auto">
+                    感情に左右されない合理的な投資判断のための実践的アプローチ
+                </p>
+            </div>
+        </header>
+
+        <!-- メインセクション1: 市場心理 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-3/5">
+                        <div class="shoken-tag mb-4">市場心理分析</div>
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-[var(--primary)]">
+                            市場心理はあなたの投資判断に<br class="hidden md:block">どう影響しているか？
+                        </h2>
+                        <p class="text-lg mb-6 text-gray-700">
+                            十分な調査をしていても、投資する際に<strong>感情に左右されやすい</strong>と感じたことはありませんか？市場心理は多くの場合、投資家の判断に気づかないうちに影響を与え、非合理的な行動につながっています。
+                        </p>
+                        <p class="text-lg mb-6 text-gray-700">
+                            私たちの分析方法は、北尾吉孝氏が提唱する「長期的価値と市場心理の融合」という投資哲学を取り入れています。ここでは、私たちのチームが長年培ってきた経験を共有します。
+                        </p>
+                        <div class="flex items-center mb-4 bg-orange-50 p-4 rounded-lg border-l-4 border-[var(--accent)]">
+                            <div class="mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">
+                                    残り<span class="kabuka-count text-[var(--accent)]">2</span>日間限定！
+                                </p>
+                                <p class="text-sm text-gray-600">
+                                    本日は80名様限定で募集しています。定員に達し次第、申し込みは締め切られます。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <button class="nihon-btn" onclick="openkk()">
+                                今すぐ枠を確保する
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-2/5">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-[var(--primary)] rounded-lg transform rotate-3 opacity-20"></div>
+                            <img src="img/3.jpg" alt="" class="relative z-10 rounded-lg shadow-xl w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション2: 投資家の課題 -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <div class="text-center mb-12">
+                    <div class="shoken-tag mb-4">重要課題</div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[var(--primary)]">
+                        投資家がよく直面する課題
+                    </h2>
+                    <div class="meigara-divider"></div>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+                        成功する投資家とそうでない投資家の違いは、これらの一般的な課題をどう認識し、対処するかにあります
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="kinyu-card p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-[var(--accent)] text-white rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">
+                                <span class="font-bold">1</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-[var(--primary)]">人気銘柄への盲目的追従</h3>
+                        </div>
+                        <p class="text-gray-700">
+                            他人の投資判断に従って購入し、高値掴みした後に株価が急落するケースが多い。
+                        </p>
+                    </div>
+                    
+                    <div class="kinyu-card p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-[var(--accent)] text-white rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">
+                                <span class="font-bold">2</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-[var(--primary)]">株価だけで判断</h3>
+                        </div>
+                        <p class="text-gray-700">
+                            「安価=安全」と考えがちだが、日本の低価格株の多くは「バリュートラップ」（長期低迷）である。
+                        </p>
+                    </div>
+                    
+                    <div class="kinyu-card p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-[var(--accent)] text-white rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">
+                                <span class="font-bold">3</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-[var(--primary)]">過度な取引</h3>
+                        </div>
+                        <p class="text-gray-700">
+                            頻繁な売買により手数料が利益を圧迫し、本当の好機を逃してしまう。
+                        </p>
+                    </div>
+                    
+                    <div class="kinyu-card p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-[var(--accent)] text-white rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">
+                                <span class="font-bold">4</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-[var(--primary)]">円相場リスクの無視</h3>
+                        </div>
+                        <p class="text-gray-700">
+                            円安局面では、海外投資家の収益が突然減少する可能性がある。
+                        </p>
+                    </div>
+                    
+                    <div class="kinyu-card p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-[var(--accent)] text-white rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">
+                                <span class="font-bold">5</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-[var(--primary)]">財務諸表の読解不足</h3>
+                        </div>
+                        <p class="text-gray-700">
+                            企業の表面的な「良いニュース」に惑わされ、隠れたリスクを見逃す。
+                        </p>
+                    </div>
+                    
+                    <div class="kinyu-card p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-[var(--accent)] text-white rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">
+                                <span class="font-bold">6</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-[var(--primary)]">メンタルの崩壊</h3>
+                        </div>
+                        <p class="text-gray-700">
+                            少し上がると売り、大きく下がると損切りし、結果として大きな利益を得られない。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-10">
+                    <button class="nihon-btn" onclick="openkk()">
+                        今すぐ参加する
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション3: 解決策 -->
+        <section class="tokyo-section py-12 bg-[var(--primary)] text-white">
+            <div class="tokyo-content container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-4 py-1 rounded-full bg-white/20 text-white text-sm font-semibold mb-4">実践的な解決策</div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+                        効果的な対応戦略
+                    </h2>
+                    <div class="meigara-divider bg-white"></div>
+                    <p class="text-lg max-w-3xl mx-auto opacity-90">
+                        プロのトレーダーや機関投資家が活用する実践的な手法を、個人投資家向けにシンプル化しました
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                        <h3 class="font-bold text-xl mb-4 text-[var(--accent-light)]">1.「3ステップスクリーニング法」</h3>
+                        <p class="mb-4 text-white/90">
+                            シンプルな指標（ROE、キャッシュフローなど）を使用して、80％のダメ株を素早く排除する方法。財務分析の専門知識がなくても適用できる実践的なフレームワークです。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                        <h3 class="font-bold text-xl mb-4 text-[var(--accent-light)]">2. 円ヘッジ戦略</h3>
+                        <p class="mb-4 text-white/90">
+                            為替変動が収益に与える影響を軽減する（機関投資家級の手法に準拠）。日本株に投資する際の円相場リスクを効果的に管理する実用的な方法を学びます。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                        <h3 class="font-bold text-xl mb-4 text-[var(--accent-light)]">3.「1時間財務諸表解読術」</h3>
+                        <p class="mb-4 text-white/90">
+                            重要なデータを素早く把握し、財務上の地雷を避ける方法を学ぶ。会計の専門家でなくても、決算書から重要な情報を抽出するためのシンプルな手順を提供します。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                        <h3 class="font-bold text-xl mb-4 text-[var(--accent-light)]">4.「ラクラク積立投資ポートフォリオ」</h3>
+                        <p class="mb-4 text-white/90">
+                            毎月自動的に日本の優良ETFに投資し、リスク分散と長期複利効果を得る。忙しい方でも実践できる、手間のかからない資産形成メソッドです。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                        <h3 class="font-bold text-xl mb-4 text-[var(--accent-light)]">5. 感情管理テンプレート</h3>
+                        <p class="mb-4 text-white/90">
+                            過去のデータを基に「いつ忍耐すべきか、いつ撤退すべきか」を判断する方法。感情に左右されず、客観的なデータに基づいた投資判断を行うためのフレームワークです。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex flex-col items-center justify-center">
+                        <div class="mb-6 relative">
+                            <div class="absolute inset-0 bg-[var(--accent)] rounded-full transform rotate-3 opacity-20"></div>
+                            <img src="img/2.jpg" alt="" class="relative z-10 w-36 h-36 object-cover rounded-full border-2 border-[var(--accent-light)]">
+                        </div>
+                        <button class="nihon-btn bg-[var(--accent-light)]" onclick="openkk()">
+                            今すぐ参加する
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- フッター：重要な開示 -->
+        <footer class="py-8 bg-gray-900 text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <h2 class="text-xl font-bold mb-4 text-[var(--accent-light)]">重要な開示</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <p class="mb-3 text-sm text-gray-300">
+                          このページで提供されるすべてのコンテンツ（テキスト、データ、チャート、ケース分析などを含むがこれらに限定されない）は、いかなる形式の投資アドバイス、証券推奨、または財務計画サービスも構成するものではありません。投資家は自らの判断でリスクを負う必要があります。
+本サービスは金融知識の普及と分析ツールの提供のみを目的としており、代理業務や資産運用、個別銘柄の売買ポイントの指導、利回りの約束や元本保全条項等は含まれません。リスク許容度があることを確認し、投資によって生じる可能性のある損失を理解する必要があります。
+個別のアドバイスについては、認可金融機関にご相談ください。
+                        </p>
+                        <p class="mb-3 text-sm text-gray-300">
+                            この交流グループは純粋に情報共有の性質を持ち、いかなる形の財務または投資アドバイスも構成しません。過去の表現は将来の結果を保証するものではありません。投資のリターンは大きく変動する可能性があり、過去の実績は将来の利益を保証するものではありません。
+                        </p>
+                    </div>
+                    <div>
+                        <p class="mb-3 text-sm text-gray-300">
+                            投資は元本割れのリスクを伴います。投資判断を行う前に、個人の財務状況、投資目標、リスク許容度を考慮し、必要に応じて資格のある専門家に相談することをお勧めします。このサイトの情報は一般的な性質のものであり、特定の個人の状況を考慮していません。
+                        </p>
+                        <p class="text-sm text-gray-300">
+                            本サイトは金融商品取引法に基づく投資助言業または投資運用業の登録を行っておらず、特定の証券、金融商品、または投資戦略の購入または売却を推奨または勧誘するものではありません。投資の決定は自己責任で行ってください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- 固定CTA ボタン -->
+        <div class="fixed bottom-5 left-0 right-0 flex justify-center z-50">
+            <button class="shisan-button bg-[var(--accent)] text-white font-bold py-3 px-10 rounded-full shadow-lg whitespace-nowrap" onclick="openkk()">
+               今すぐ参加
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ダークモード検出と適用
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // LINE リンクを開く関数
+        function openkk() {
+            window.open('https://line.me/ti/p/~', '_blank');
+        }
+    </script>
+</body>
+</html>
